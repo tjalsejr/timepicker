@@ -52,7 +52,7 @@ export default async function HomePage({
       </header>
 
       {/* 2. 히어로 — 그라데이션 배경 + 아이콘 타일 + eyebrow 배지 */}
-      <section className="relative overflow-hidden px-5 pb-10 pt-12">
+      <section className="relative overflow-hidden px-5 pb-10 pt-4">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-brand-light to-transparent" />
         <div className="relative flex flex-col items-center gap-4 text-center">
           <Image
