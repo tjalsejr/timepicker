@@ -9,6 +9,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // 마이그레이션/db push는 다이렉트 연결 사용 (풀러/PgBouncer는 DDL에 제약)
+    url: process.env["DIRECT_URL"] ?? process.env["DATABASE_URL"],
   },
 });

@@ -12,6 +12,9 @@ import { isLocale } from "@/lib/i18n/config";
 // NOTE: 이 메인 페이지는 OGQ마켓 스타일 스토리텔링 랜딩으로,
 // 사용자 요청에 따라 예외적으로 이모지를 사용한다(다른 화면은 이모지 금지 규칙 유지).
 
+// 공개 캡슐을 매 요청마다 조회 → 빌드 시 정적 프리렌더(DB 접근)를 막아 배포 빌드 안정화
+export const dynamic = "force-dynamic";
+
 export default async function HomePage({
   params,
 }: {
