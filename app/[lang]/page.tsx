@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { HeroLottie } from "@/lib/components/HeroLottie";
+import Image from "next/image";
+import heroPerson from "@/lib/assets/hero-idea-person.png";
 import { ButtonLink } from "@/lib/components/ui";
 import { CapsuleCard } from "@/lib/components/CapsuleCard";
 import { FaqAccordion } from "@/lib/components/FaqAccordion";
@@ -57,9 +58,12 @@ export default async function HomePage({
           <span className="rounded-full bg-brand-light px-3 py-1 text-[12px] font-bold tracking-wide text-brand">
             {h.heroBadge}
           </span>
-          <div className="grid size-32 place-items-center rounded-[32px] bg-white shadow-float ring-1 ring-line/70">
-            <HeroLottie className="size-24" />
-          </div>
+          <Image
+            src={heroPerson}
+            alt=""
+            priority
+            className="size-40 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)]"
+          />
           <h1 className="text-[28px] font-extrabold leading-tight text-ink">
             {dict.app.tagline}
           </h1>
