@@ -50,6 +50,7 @@ const ko = {
   },
   home: {
     headerCta: "타임캡슐 만들기",
+    heroBadge: "디지털 타임캡슐",
     heroCta: "타임캡슐 만들기",
     exploreCta: "공개 캡슐 둘러보기",
     recentPublic: "최근 공개된 타임캡슐",

@@ -53,6 +53,7 @@ const en: typeof ko = {
   },
   home: {
     headerCta: "Create a capsule",
+    heroBadge: "Digital time capsule",
     heroCta: "Create a capsule",
     exploreCta: "Explore public capsules",
     recentPublic: "Recently opened capsules",

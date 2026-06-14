@@ -50,15 +50,23 @@ export default async function HomePage({
         </Link>
       </header>
 
-      {/* 2. 히어로 */}
-      <section className="flex flex-col items-center gap-3 px-5 pb-6 pt-10 text-center">
-        <HeroLottie className="size-32" />
-        <h1 className="text-[28px] font-extrabold leading-tight text-ink">
-          {dict.app.tagline}
-        </h1>
-        <p className="max-w-xs text-[15px] leading-relaxed text-muted">
-          {dict.app.description}
-        </p>
+      {/* 2. 히어로 — 그라데이션 배경 + 아이콘 타일 + eyebrow 배지 */}
+      <section className="relative overflow-hidden px-5 pb-10 pt-12">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-brand-light to-transparent" />
+        <div className="relative flex flex-col items-center gap-4 text-center">
+          <span className="rounded-full bg-brand-light px-3 py-1 text-[12px] font-bold tracking-wide text-brand">
+            {h.heroBadge}
+          </span>
+          <div className="grid size-32 place-items-center rounded-[32px] bg-white shadow-float ring-1 ring-line/70">
+            <HeroLottie className="size-24" />
+          </div>
+          <h1 className="text-[28px] font-extrabold leading-tight text-ink">
+            {dict.app.tagline}
+          </h1>
+          <p className="max-w-xs text-[15px] leading-relaxed text-muted">
+            {dict.app.description}
+          </p>
+        </div>
       </section>
 
       {/* 3. 피처 블록 (이모지 + 큰 제목 + 본문) */}
@@ -156,7 +164,7 @@ export default async function HomePage({
 
       {/* 6. 지금 바로 시작 — 폰 목업 + 워터마크 */}
       <section className="relative overflow-hidden px-5 py-16 text-center">
-        <span className="pointer-events-none absolute inset-x-0 top-28 select-none whitespace-nowrap text-center text-[72px] font-black leading-none text-surface">
+        <span className="pointer-events-none absolute inset-x-0 top-28 select-none whitespace-nowrap text-center text-[72px] font-black leading-none text-blue-50">
           TimePicker
         </span>
         <div className="relative">
@@ -185,7 +193,7 @@ export default async function HomePage({
         </h2>
         <div className="mt-6 flex justify-center gap-1.5">
           {[0, 1, 2, 3, 4].map((i) => (
-            <span key={i} className="size-2 rounded-full bg-success" />
+            <span key={i} className="size-2 rounded-full bg-blue-500" />
           ))}
         </div>
       </section>
