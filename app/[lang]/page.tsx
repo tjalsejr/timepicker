@@ -55,14 +55,11 @@ export default async function HomePage({
       <section className="relative overflow-hidden px-5 pb-10 pt-12">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-brand-light to-transparent" />
         <div className="relative flex flex-col items-center gap-4 text-center">
-          <span className="rounded-full bg-brand-light px-3 py-1 text-[12px] font-bold tracking-wide text-brand">
-            {h.heroBadge}
-          </span>
           <Image
             src={heroPerson}
             alt=""
             priority
-            className="size-40 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)]"
+            className="size-56 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)]"
           />
           <h1 className="text-[28px] font-extrabold leading-tight text-ink">
             {dict.app.tagline}
