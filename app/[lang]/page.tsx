@@ -59,7 +59,7 @@ export default async function HomePage({
             src={heroPerson}
             alt=""
             priority
-            className="size-56 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)]"
+            className="size-64 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.12)]"
           />
           <h1 className="text-[28px] font-extrabold leading-tight text-ink">
             {dict.app.tagline}
