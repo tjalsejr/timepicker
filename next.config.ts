@@ -7,12 +7,6 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
-  images: {
-    // Google 프로필 이미지 등 외부 호스트 허용
-    remotePatterns: [
-      { protocol: "https", hostname: "lh3.googleusercontent.com" },
-    ],
-  },
 };
 
 export default nextConfig;

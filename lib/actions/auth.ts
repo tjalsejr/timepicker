@@ -84,8 +84,3 @@ export async function logoutAction(formData: FormData) {
   const lang = resolveLang(formData.get("lang"));
   await signOut({ redirectTo: `/${lang}` });
 }
-
-export async function googleLoginAction(formData: FormData) {
-  const lang = resolveLang(formData.get("lang"));
-  await signIn("google", { redirectTo: `/${lang}/my` });
-}

@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
@@ -10,10 +9,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   session: { strategy: "jwt" },
   providers: [
-    Google({
-      // AUTH_GOOGLE_ID / AUTH_GOOGLE_SECRET 환경변수를 자동으로 사용
-      allowDangerousEmailAccountLinking: true,
-    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "email" },
@@ -40,21 +35,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    // Google 최초 로그인 시 User 테이블에 upsert
-    async signIn({ user, account }) {
-      if (account?.provider === "google" && user.email) {
-        await prisma.user.upsert({
-          where: { email: user.email },
-          update: {},
-          create: {
-            email: user.email,
-            username: user.name ?? user.email.split("@")[0],
-            image: user.image ?? null,
-          },
-        });
-      }
-      return true;
-    },
     // JWT에 DB의 정식 사용자 id/username 저장
     async jwt({ token, user }) {
       if (user?.email) {

@@ -37,12 +37,10 @@ const en: typeof ko = {
     email: "Email",
     password: "Password",
     passwordConfirm: "Confirm password",
-    loginWithGoogle: "Continue with Google",
     noAccount: "Don't have an account?",
     haveAccount: "Already have an account?",
     loginCta: "Log in",
     registerCta: "Sign up",
-    or: "or",
     loginRequired: "Log in required",
     loginRequiredDesc: "Log in to use this feature.",
     errors: {
@@ -121,6 +119,7 @@ const en: typeof ko = {
   profile: {
     title: "Profile",
     edit: "Edit profile",
+    language: "Language",
     username: "Name",
     joinedAt: "Joined",
     capsuleCount: "Capsules",

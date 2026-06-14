@@ -4,6 +4,7 @@ import { IconUser as UserIcon } from "@tabler/icons-react";
 import { AppBar } from "@/lib/components/AppBar";
 import { Card } from "@/lib/components/ui";
 import { ProfileForm } from "@/lib/components/ProfileForm";
+import { LanguageSetting } from "@/lib/components/LanguageSetting";
 import { LogoutButton } from "@/lib/components/CapsuleInteractions";
 import { prisma } from "@/lib/prisma";
 import { getDictionary } from "@/lib/i18n";
@@ -66,6 +67,8 @@ export default async function MyPage({
             initialUsername={user.username}
           />
         </div>
+
+        <LanguageSetting lang={lang} label={dict.profile.language} />
 
         <LogoutButton lang={lang} dict={dict} />
       </div>

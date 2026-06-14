@@ -34,12 +34,10 @@ const ko = {
     email: "이메일",
     password: "비밀번호",
     passwordConfirm: "비밀번호 확인",
-    loginWithGoogle: "Google로 계속하기",
     noAccount: "아직 계정이 없으신가요?",
     haveAccount: "이미 계정이 있으신가요?",
     loginCta: "로그인하기",
     registerCta: "가입하기",
-    or: "또는",
     loginRequired: "로그인이 필요해요",
     loginRequiredDesc: "이 기능은 로그인 후 이용할 수 있어요.",
     errors: {
@@ -118,6 +116,7 @@ const ko = {
   profile: {
     title: "마이페이지",
     edit: "프로필 수정",
+    language: "언어",
     username: "이름",
     joinedAt: "가입일",
     capsuleCount: "작성한 캡슐",

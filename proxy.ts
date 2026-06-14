@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { locales, defaultLocale } from "@/lib/i18n/config";
 
-// 들어온 요청의 Accept-Language로 선호 로케일 추정 (간단 버전)
+// 선호 로케일 추정: ① 사용자가 프로필에서 고른 NEXT_LOCALE 쿠키 → ② Accept-Language
 function getLocale(request: NextRequest): string {
+  const cookie = request.cookies.get("NEXT_LOCALE")?.value;
+  if (cookie && (locales as readonly string[]).includes(cookie)) {
+    return cookie;
+  }
   const header = request.headers.get("accept-language") ?? "";
   const preferred = header.split(",")[0]?.split("-")[0]?.toLowerCase();
   if (preferred && (locales as readonly string[]).includes(preferred)) {
