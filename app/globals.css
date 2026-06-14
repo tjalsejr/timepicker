@@ -1,0 +1,214 @@
+@import "tailwindcss";
+/* Pretendard 웹폰트는 루트 레이아웃(app/[lang]/layout.tsx)의 stylesheet link로 로드한다.
+   Tailwind v4 번들러가 외부 import를 컴파일 시 제거하므로 CSS import는 쓰지 않는다. */
+
+/* ─────────────────────────────────────────────
+   TimePicker — Toss(토스) 기반 디자인 토큰
+   자세한 규칙은 DESIGN.md 참고. 이모지 금지 → @tabler/icons-react 사용.
+   ───────────────────────────────────────────── */
+
+@theme {
+  /* Primary — 인터랙션 전용 */
+  --color-brand: #3182f6;
+  --color-brand-hover: #2272eb;
+  --color-brand-light: #e8f3ff;
+
+  /* Surface */
+  --color-bg: #ffffff;
+  --color-surface: #f2f4f6;
+
+  /* Text (grey scale, warm undertone) */
+  --color-ink: #191f28; /* 제목 */
+  --color-ink-strong: #333d4b;
+  --color-ink-soft: #4e5968;
+  --color-muted: #6b7684; /* 본문 */
+  --color-caption: #8b95a1; /* 캡션 */
+  --color-placeholder: #b0b8c1;
+
+  /* Border */
+  --color-line: #e5e8eb;
+  --color-line-strong: #d1d6db;
+
+  /* Semantic */
+  --color-success: #03b26c;
+  --color-danger: #f04452;
+  --color-warning: #fe9800;
+  --color-info: #18a5a5;
+
+  /* Radius */
+  --radius-input: 14px;
+  --radius-card: 12px;
+  --radius-sheet: 16px;
+
+  /* Shadow — 단일 레이어 순수 검정 */
+  --shadow-card: 0px 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0px 4px 12px rgba(0, 0, 0, 0.12);
+
+  --font-sans:
+    "Pretendard Variable", Pretendard, "SF Pro KR", -apple-system,
+    BlinkMacSystemFont, "Apple SD Gothic Neo", Roboto, "Noto Sans KR",
+    "Segoe UI", sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 모바일 웹뷰 앱 셸 — 데스크톱에서도 480px 중앙 컬럼 */
+.app-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--color-bg);
+}
+
+/* 콘텐츠 영역 — 하단 패딩은 화면 래퍼(.vt-screen)에서 처리 */
+.app-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* 트랜지션 캡처 화면 — 컬럼 전체를 덮는 불투명 박스 + 하단 탭바 여백 */
+.vt-screen {
+  flex: 1;
+  min-height: 100dvh;
+  background: var(--color-bg);
+  padding-bottom: calc(64px + env(safe-area-inset-bottom));
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f2f4f6 25%, #e9ecf0 37%, #f2f4f6 63%);
+  background-size: 400px 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   iOS식 스택 push/pop 트랜지션 (React <ViewTransition>)
+   방향: <Link transitionTypes={['nav-forward'|'nav-back']}>
+   ───────────────────────────────────────────── */
+:root {
+  --stack-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --stack-dur: 340ms;
+}
+
+/* 페이지 외 요소(루트)는 애니메이션 없음 — 콘텐츠만 슬라이드 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* 하단 탭바는 트랜지션 중 고정 (슬라이드 X) */
+::view-transition-group(app-tabbar) {
+  animation: none !important;
+  z-index: 20;
+}
+
+/* 슬라이드를 앱 컬럼(480px) 박스에 맞춰 잘라냄 — 옆 회색 영역으로 삐져나오지 않게 (iOS식) */
+::view-transition-group(.nav-forward),
+::view-transition-group(.nav-back) {
+  overflow: clip;
+}
+
+/* push (forward): 새 화면 오른쪽→중앙, 이전 화면 살짝 왼쪽 + 어둡게 */
+::view-transition-old(.nav-forward) {
+  animation: var(--stack-dur) var(--stack-ease) both stack-old-forward;
+}
+::view-transition-new(.nav-forward) {
+  z-index: 2;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+  animation: var(--stack-dur) var(--stack-ease) both stack-new-forward;
+}
+@keyframes stack-old-forward {
+  from {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  to {
+    transform: translateX(-22%);
+    filter: brightness(0.9);
+  }
+}
+@keyframes stack-new-forward {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* pop (back): 현재 화면 오른쪽 퇴장, 이전 화면 왼쪽→중앙 */
+::view-transition-old(.nav-back) {
+  z-index: 2;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+  animation: var(--stack-dur) var(--stack-ease) both stack-old-back;
+}
+::view-transition-new(.nav-back) {
+  animation: var(--stack-dur) var(--stack-ease) both stack-new-back;
+}
+@keyframes stack-old-back {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes stack-new-back {
+  from {
+    transform: translateX(-22%);
+    filter: brightness(0.9);
+  }
+  to {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+  }
+}

@@ -1,0 +1,74 @@
+// TimePicker — Prisma schema (SQLite)
+// 마이그레이션 계획은 prisma/MIGRATION.md 참고
+// 클라이언트 생성: npx prisma generate / 마이그레이션: npx prisma migrate dev
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../lib/generated/prisma"
+  // 명시적 런타임/모듈 포맷 — Next.js(Node) 서버에서 사용
+  runtime      = "nodejs"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String    @id @default(cuid())
+  username  String
+  email     String    @unique
+  // 자체 로그인 사용자만 비밀번호 보유. Google 로그인은 null.
+  password  String?
+  image     String?
+  createdAt DateTime  @default(now())
+
+  capsules  Capsule[]
+  comments  Comment[]
+  likes     Like[]
+}
+
+model Capsule {
+  id        String    @id @default(cuid())
+  title     String
+  content   String    // SQLite: Text 매핑
+  openDate  DateTime
+  isPublic  Boolean   @default(false)
+  imageUrl  String?
+  userId    String
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments  Comment[]
+  likes     Like[]
+
+  @@index([userId])
+  @@index([isPublic, openDate])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  capsuleId String
+  userId    String
+  createdAt DateTime @default(now())
+
+  capsule   Capsule  @relation(fields: [capsuleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([capsuleId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  capsuleId String
+  userId    String
+  createdAt DateTime @default(now())
+
+  capsule   Capsule  @relation(fields: [capsuleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 한 사용자는 캡슐당 좋아요 1개
+  @@unique([capsuleId, userId])
+  @@index([capsuleId])
+}
