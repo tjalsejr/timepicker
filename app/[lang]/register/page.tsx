@@ -21,8 +21,19 @@ export default async function RegisterPage({
   return (
     <>
       <AppBar title={dict.auth.register} backHref={`/${lang}/login`} />
-      <div className="flex flex-col gap-6 px-5 py-8">
-        <h2 className="text-[22px] font-bold text-ink">{dict.auth.register}</h2>
+      {/* 로그인과 동일한 그라데이션 히어로 */}
+      <section className="relative overflow-hidden px-5 pb-2 pt-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-brand-light to-transparent" />
+        <div className="relative flex flex-col items-center gap-2 text-center">
+          <h2 className="text-[26px] font-extrabold text-ink">
+            {dict.app.name}
+          </h2>
+          <p className="text-[15px] leading-relaxed text-muted">
+            {dict.app.tagline}
+          </p>
+        </div>
+      </section>
+      <div className="px-5 pb-10 pt-4">
         <RegisterForm lang={lang} dict={dict} />
       </div>
     </>

@@ -1,5 +1,4 @@
 import { notFound, redirect } from "next/navigation";
-import { IconHourglass as Hourglass } from "@tabler/icons-react";
 import { AppBar } from "@/lib/components/AppBar";
 import { LoginForm } from "@/lib/components/auth/AuthForms";
 import { getDictionary } from "@/lib/i18n";
@@ -25,14 +24,19 @@ export default async function LoginPage({
   return (
     <>
       <AppBar title={dict.auth.login} backHref={`/${lang}`} />
-      <div className="flex flex-col gap-6 px-5 py-8">
-        <div className="flex flex-col items-center gap-2 text-center">
-          <span className="flex size-12 items-center justify-center rounded-2xl bg-brand-light text-brand">
-            <Hourglass className="size-6" />
-          </span>
-          <h2 className="text-[22px] font-bold text-ink">{dict.app.name}</h2>
-          <p className="text-[14px] text-muted">{dict.app.tagline}</p>
+      {/* 홈과 같은 그라데이션 히어로 (아이콘 없이) */}
+      <section className="relative overflow-hidden px-5 pb-2 pt-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-brand-light to-transparent" />
+        <div className="relative flex flex-col items-center gap-2 text-center">
+          <h2 className="text-[26px] font-extrabold text-ink">
+            {dict.app.name}
+          </h2>
+          <p className="text-[15px] leading-relaxed text-muted">
+            {dict.app.tagline}
+          </p>
         </div>
+      </section>
+      <div className="px-5 pb-10 pt-4">
         <LoginForm lang={lang} dict={dict} callbackUrl={callbackUrl} />
       </div>
     </>
