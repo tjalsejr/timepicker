@@ -52,6 +52,7 @@ const en: typeof ko = {
     },
   },
   home: {
+    headerCta: "Create a capsule",
     heroCta: "Create a capsule",
     exploreCta: "Explore public capsules",
     recentPublic: "Recently opened capsules",
@@ -61,6 +62,58 @@ const en: typeof ko = {
     feature2Desc: "No one can open it before the date you set.",
     feature3Title: "Share together",
     feature3Desc: "Make capsules public to share memories with others.",
+    // Story blocks (chat mockups)
+    story1Eyebrow: "From today's you",
+    story1Title: "To you, one year later",
+    story1Desc: "Pour today's feelings into a note for your future self.",
+    story2Eyebrow: "Shared together",
+    story2Title: "Public time capsules",
+    story2Desc: "Make capsules public to share memories with others.",
+    mockToday: "Today's me",
+    mockFuture: "Future me",
+    mockTodayMsg: "Open this a year from now!",
+    mockSealedTitle: "Sealed capsule",
+    mockSealedHint: "Opens in 365 days",
+    mockFutureMsg: "Thanks — I'm doing great :)",
+    mockTime: "2:00 PM",
+    mockPublicTitle: "A promise at twenty",
+    mockPublicAuthor: "Minseo",
+    // Try section
+    tryTitle: "Start right now",
+    tryDesc: "One line today becomes a gift for tomorrow.",
+    tryPhoneTitle: "To me at twenty",
+    tryPhoneBody: "This year, I'll start working out and smile more often.",
+    tryPhoneDate: "Opens 2027.06.15",
+    // Closing line
+    closingLine: "A word today\nbecomes tomorrow's gift",
+    // FAQ
+    faqTitle: "Frequently asked questions",
+    faq: [
+      {
+        q: "What is TimePicker?",
+        a: "A digital time capsule service — leave messages and photos for your future self and reopen them on the date you choose.",
+      },
+      {
+        q: "How do I create a capsule?",
+        a: "After logging in, open 'Create a capsule', set a title, message and open date, optionally attach a photo, and seal it.",
+      },
+      {
+        q: "Can I read it before the open date?",
+        a: "No. Not even you can open it before the date arrives — the open check is enforced on the server.",
+      },
+      {
+        q: "What's the difference between public and private?",
+        a: "Public capsules can be viewed, liked and commented on by others once opened. Private capsules are only for you.",
+      },
+      {
+        q: "Can I edit or delete my capsules?",
+        a: "Yes — you can edit or delete your own capsules anytime from 'My capsules'.",
+      },
+    ],
+    // Final CTA card
+    ctaTitle: "Seal your first time capsule",
+    ctaDesc: "A line for your future self — start now.",
+    ctaButton: "Create a capsule",
   },
   capsule: {
     title: "Title",
